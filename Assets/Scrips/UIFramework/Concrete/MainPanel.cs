@@ -16,5 +16,6 @@ public class MainPanel : BasePanel
             Push(new PousePanel());
             Time.timeScale = 0;
         });
+        UITool.GetOrAddComponentInChild<Transform>("TalkBG").gameObject.SetActive(false);
     }
 }

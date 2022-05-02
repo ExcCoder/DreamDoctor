@@ -19,6 +19,7 @@ public class MainScene : SceneState//SceneStart
         {
             panelManager.Push(new MainPanel());
         }
+        
     }
 
     public override void OnExit()
