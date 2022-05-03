@@ -9,6 +9,7 @@ public class MainPanel : BasePanel
     public MainPanel() : base(new UIType(path)) { }
     public override void OnEnter()
     {
+       
         UITool.GetOrAddComponentInChild<Button>("PouseBtn").onClick.AddListener(() =>
         {
             //点击事件可以写在这里面
@@ -18,4 +19,5 @@ public class MainPanel : BasePanel
         });
         UITool.GetOrAddComponentInChild<Transform>("TalkBG").gameObject.SetActive(false);
     }
+    
 }

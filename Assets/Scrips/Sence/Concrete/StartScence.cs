@@ -21,6 +21,7 @@ public class StartScene : SceneState
     /// </summary>
     public override void OnEnter()
     {
+        
         panelManager = new PanelManager();
         if (SceneManager.GetActiveScene().name != sceneName)
         {

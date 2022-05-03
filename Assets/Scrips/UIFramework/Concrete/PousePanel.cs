@@ -11,12 +11,14 @@ public class PousePanel : BasePanel
     {
         UITool.GetOrAddComponentInChild<Button>("ContinueBtn").onClick.AddListener(() =>
         {
-            Pop();
+            
             Time.timeScale = 1;
             Debug.Log("点击了继续游戏按钮");
+            Pop();
         });
         UITool.GetOrAddComponentInChild<Button>("ComeBankBtn").onClick.AddListener(() =>
         {
+            
             Debug.Log("返回标题界面的按钮被点了");
             Time.timeScale = 1;
             GameRoot.Instance.SceneSystem.SetScene(new StartScene());

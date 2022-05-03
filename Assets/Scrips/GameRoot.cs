@@ -11,7 +11,7 @@ public class GameRoot : MonoBehaviour
     /// <summary>
     /// ≥°æ∞π‹¿Ì∆˜
     /// </summary>
-    public SceneSystem SceneSystem { get; private set; } 
+    public SceneSystem SceneSystem { get; private set; }
     private void Awake()
     {
         if (Instance == null)

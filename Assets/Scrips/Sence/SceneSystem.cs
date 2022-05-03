@@ -7,6 +7,7 @@ using UnityEngine;
 public class SceneSystem
 {
     SceneState sceneState;
+    public static bool Change;
     /// <summary>
     /// 设置当前场景并进入当前场景
     /// </summary>

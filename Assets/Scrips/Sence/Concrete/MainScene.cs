@@ -19,7 +19,10 @@ public class MainScene : SceneState//SceneStart
         {
             panelManager.Push(new MainPanel());
         }
-        
+        Debug.Log("我被执行了");
+        GameObject cam =  GameObject.Find("Main Camera");
+        Material mat = Resources.Load<Material>("Shader/UnityCg_OVRScreenFade2");
+        cam.GetComponent<Renderer>().material = mat;
     }
 
     public override void OnExit()

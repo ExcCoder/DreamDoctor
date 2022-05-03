@@ -77,4 +77,5 @@ public class BasePanel
     }
     public void Push(BasePanel panel) => PanelManager?.Push(panel);
     public void Pop() => PanelManager?.Pop();
+    public void PopAll() => PanelManager?.PopAll();
 }
