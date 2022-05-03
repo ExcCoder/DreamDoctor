@@ -16,6 +16,7 @@ public class SceneSystem
         sceneState?.OnExit();
         sceneState = state;
         sceneState?.OnEnter();
+
     }
 
 }
