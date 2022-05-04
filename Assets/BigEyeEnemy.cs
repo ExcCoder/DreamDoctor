@@ -82,7 +82,6 @@ public class BigEyeEnemy : MonoBehaviour
         if (!flag && animator.GetFloat("animSpeed")>0.1f)
         {
             animator.SetFloat("animSpeed", -1);
-            Debug.Log("ตนอหมห");
         }
     }
 

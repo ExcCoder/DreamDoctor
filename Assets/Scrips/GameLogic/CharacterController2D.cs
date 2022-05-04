@@ -5,7 +5,6 @@ public class CharacterController2D : MonoBehaviour
 {
 	public float jumpForce;                                  // 弹跳力
 	[Range(0,30)] public int maxJumpPressingTime = 15;
-	[Range(0,10)] public float runSpeed = 1.5f;
 	[Range(0, .3f)] public float movementSmoothing = .05f;	// 平滑变速参数
 	public bool airControl = false;							// 空中是否可以控制角色
 	public LayerMask whatIsGround;							// 指定哪些是角色可以识别的地面
@@ -29,9 +28,6 @@ public class CharacterController2D : MonoBehaviour
 	{
 		rigbody = GetComponent<Rigidbody2D>();
 		animator = this.GetComponent<Animator>();
-		Sprite defaultSprite = GetComponent<SpriteRenderer>().sprite;
-		const float humanBodyAvgWidth = 0.6f;		//根据人类真实比例调整
-		runSpeedInUnit = ((defaultSprite.rect.width/defaultSprite.pixelsPerUnit) / humanBodyAvgWidth ) * runSpeed;
 	}
 
 
@@ -76,23 +72,26 @@ public class CharacterController2D : MonoBehaviour
         }
 	}
 
-    public void Move(float move, bool jumpPressed)
+	// move 应该传递两个参数，一个是自发力（键盘），一个是外力（如移动平台提供的摩擦力）
+	// 只有自发力的时候才会播放人物移动的动画
+    public void Move(float moveSpeed, float outsideSpeed, bool jumpPressed)
 	{
-		animator.SetFloat("XSpeed",Mathf.Abs(move));
+		float totalSpeed = moveSpeed + outsideSpeed;
+		animator.SetFloat("XSpeed",Mathf.Abs(moveSpeed));
 
 		//横向移动
 		if (isGrounded || airControl)	{
 			//m_Rigidbody2D.AddForce(new Vector2(move*10f, 0f));
-			Vector2 targetVelocity = new Vector2(move * runSpeedInUnit,rigbody.velocity.y);
+			Vector2 targetVelocity = new Vector2(totalSpeed,rigbody.velocity.y);
 			rigbody.velocity = Vector3.SmoothDamp(rigbody.velocity, targetVelocity, ref velocity, movementSmoothing);
 
 			//转向处理
-			if (move > 0 && !isFacingRight)
+			if (moveSpeed > 0 && !isFacingRight)
 			{
 				// ... flip the player.
 				Flip();
 			}
-			else if (move < 0 && isFacingRight)
+			else if (moveSpeed < 0 && isFacingRight)
 			{
 				// ... flip the player.
 				Flip();

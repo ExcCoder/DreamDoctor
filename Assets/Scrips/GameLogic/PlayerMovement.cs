@@ -5,12 +5,22 @@ public class PlayerMovement : MonoBehaviour {
 
 	public CharacterController2D controller;
 	public AudioClip clip;
+	[Range(0, 10)] public float runSpeed = 1.5f;
 
-	float horizontalMove = 0f;
+	float horizontalSpeed = 0f;
 	bool jumpPressed = false;
 
-	void Update () {
-		horizontalMove = Input.GetAxisRaw("Horizontal");
+	private Vector2 outsideSpeed;
+	private float runSpeedInUnit;
+
+    private void Start()
+    {
+		Sprite defaultSprite = GetComponent<SpriteRenderer>().sprite;
+		const float humanBodyAvgWidth = 0.6f;       //根据人类真实比例调整
+		runSpeedInUnit = ((defaultSprite.rect.width / defaultSprite.pixelsPerUnit) / humanBodyAvgWidth) * runSpeed;
+	}
+    void Update () {
+		horizontalSpeed = Input.GetAxisRaw("Horizontal") * runSpeedInUnit;
 		if (Input.GetButtonDown("Jump"))
 		{
 			jumpPressed = true;
@@ -20,7 +30,8 @@ public class PlayerMovement : MonoBehaviour {
 	void FixedUpdate ()
 	{
 		// 移动角色
-		controller.Move(horizontalMove, jumpPressed);
+		controller.Move(horizontalSpeed, outsideSpeed.x, jumpPressed);
+		outsideSpeed = Vector2.zero;
 		jumpPressed = false;
 	}
 
@@ -35,4 +46,9 @@ public class PlayerMovement : MonoBehaviour {
 			this.enabled = false;
 		}
 	}
+
+	public void SetOutsideSpeed(Vector2 speed)
+    {
+		outsideSpeed = speed;
+    }
 }
