@@ -53,28 +53,6 @@ public class Dialogue : MonoBehaviour
         charsPerSecond = Mathf.Max(0.2f, charsPerSecond);
 
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-
-        //如果标签为可交互则触发
-        if (collision.tag == "Insteract")
-        {
-            Interact = collision.gameObject;
-            Interact.transform.GetChild(0).gameObject.SetActive(true);
-
-            isInteract = true;
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (Interact != null)
-        {
-            Interact.transform.GetChild(0).gameObject.SetActive(false);
-            isInteract = false;
-
-        }
-    }
-    // Update is called once per frame
     void Update()
     {
         //是否可以交互
@@ -138,13 +116,14 @@ public class Dialogue : MonoBehaviour
             }
         }
     }
+
     /// <summary>
     /// 为栈添加文本内容
     /// </summary>
     public void SayBagin()
     {
-
-
+        Saycontent.Push("看一下");
+        Saycontent.Push("这有张纸条");
     }
     /// <summary>
     /// 执行打字任务
@@ -258,29 +237,6 @@ public class Dialogue : MonoBehaviour
     void SayPart1_1()
     {
         
-        Saycontent.Push("林夕：\n这东西感觉比三头犬还要不妙，还是不要打扰它比较好。");
-
-        Saycontent.Push("林夕：\n呃，这家伙都在梦些什么啊……");
-
-        Saycontent.Push("林夕向前走动，关卡1怪物出现。");
-        Saycontent.Push("林夕:\n这里是，刚才躺着那家伙的梦境？");
-        Saycontent.Push("林夕:\n不过，开玩笑的吧…难道办公桌上的字条是真的。");
-        Saycontent.Push("林夕:\n也是，完全没在工作的人怎么会加班猝死呢。");
-        Saycontent.Push("林夕:\n三头犬都没有，不是地狱啊");
-        Saycontent.Push("林夕左右看看。");
-        Saycontent.Push("林夕:\n…林医生，终于加班过度以身殉职了吗。");
-        Saycontent.Push("林夕:\n这是哪？地狱？");
-        Saycontent.Push("林夕目瞪口呆。");
-        Saycontent.Push("林夕:\n？？？欸？？");
-        Saycontent.Push("林夕仓惶跌落至梦境中。（出现在关卡1入口处）");
-
-    }
-    /// <summary>
-    /// 第一次卷入梦境
-    /// </summary>
-    void SayPart1_1()
-    {
-
         Saycontent.Push("林夕：\n这东西感觉比三头犬还要不妙，还是不要打扰它比较好。");
 
         Saycontent.Push("林夕：\n呃，这家伙都在梦些什么啊……");
