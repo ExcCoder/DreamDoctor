@@ -14,26 +14,10 @@ public class MainPanel : BasePanel
         {
             //点击事件可以写在这里面
             Debug.Log("暂停按钮被点了");
-            Push(new PousePanel());
-            Time.timeScale = 0;
-        });
-        UITool.GetOrAddComponentInChild<Button>("MicClick").onClick.AddListener(() =>
-        {
-            //点击事件可以写在这里面
-            Debug.Log("唱片机被拍打了");
-            Push(new PousePanel());
-            Time.timeScale = 0;
-        });
-        UITool.GetOrAddComponentInChild<Button>("MicChange").onClick.AddListener(() =>
-        {
-            //点击事件可以写在这里面
-            Debug.Log("唱片机被");
-            Push(new PousePanel());
-            Time.timeScale = 0;
+            Push(new MicItem());
+            //Time.timeScale = 0;
         });
         UITool.GetOrAddComponentInChild<Transform>("TalkBG").gameObject.SetActive(false);
-        UITool.FindChildGameObject("MicClick").SetActive(false);
-        UITool.FindChildGameObject("MicChange").SetActive(false);
 
     }
 
