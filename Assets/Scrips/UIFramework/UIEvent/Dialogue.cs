@@ -98,6 +98,15 @@ public class Dialogue : MonoBehaviour
 
             if (College2DReturn.isPush)
             {
+                switch (College2DReturn.Interact.name)
+                {
+                    case "唱片机":
+
+                            break;
+                    case "电脑桌":
+                        break;
+
+                }
                 SayBagin();
                 Debug.Log("填装完毕");
                 College2DReturn.isPush = false;
@@ -127,21 +136,7 @@ public class Dialogue : MonoBehaviour
     /// </summary>
     public void SayBagin()
     {
-        Saycontent.Push("林夕：\n这东西感觉比三头犬还要不妙，还是不要打扰它比较好。");
-
-        Saycontent.Push("林夕：\n呃，这家伙都在梦些什么啊……");
-
-        Saycontent.Push("林夕向前走动，关卡1怪物出现。");
-        Saycontent.Push("林夕:\n这里是，刚才躺着那家伙的梦境？");
-        Saycontent.Push("林夕:\n不过，开玩笑的吧…难道办公桌上的字条是真的。");
-        Saycontent.Push("林夕:\n也是，完全没在工作的人怎么会加班猝死呢。");
-        Saycontent.Push("林夕:\n三头犬都没有，不是地狱啊");
-        Saycontent.Push("林夕左右看看。");
-        Saycontent.Push("林夕:\n…林医生，终于加班过度以身殉职了吗。");
-        Saycontent.Push("林夕:\n这是哪？地狱？");
-        Saycontent.Push("林夕目瞪口呆。");
-        Saycontent.Push("林夕:\n？？？欸？？");
-        Saycontent.Push("林夕仓惶跌落至梦境中。（出现在关卡1入口处）");
+       
 
     }
     /// <summary>
@@ -234,5 +229,28 @@ public class Dialogue : MonoBehaviour
         Saycontent.Push("△突然一阵光芒出现（或者关卡传送门出现），林夕惊恐。（美术爸爸）");
         Saycontent.Push("林夕：就这样耗到下班吧。");
         Saycontent.Push("林夕：这可是货真价实的催眠治疗大套餐。");
+    }
+    /// <summary>
+    /// 第一次卷入梦境
+    /// </summary>
+    void SayPart1_1()
+    {
+        
+        Saycontent.Push("林夕：\n这东西感觉比三头犬还要不妙，还是不要打扰它比较好。");
+
+        Saycontent.Push("林夕：\n呃，这家伙都在梦些什么啊……");
+
+        Saycontent.Push("林夕向前走动，关卡1怪物出现。");
+        Saycontent.Push("林夕:\n这里是，刚才躺着那家伙的梦境？");
+        Saycontent.Push("林夕:\n不过，开玩笑的吧…难道办公桌上的字条是真的。");
+        Saycontent.Push("林夕:\n也是，完全没在工作的人怎么会加班猝死呢。");
+        Saycontent.Push("林夕:\n三头犬都没有，不是地狱啊");
+        Saycontent.Push("林夕左右看看。");
+        Saycontent.Push("林夕:\n…林医生，终于加班过度以身殉职了吗。");
+        Saycontent.Push("林夕:\n这是哪？地狱？");
+        Saycontent.Push("林夕目瞪口呆。");
+        Saycontent.Push("林夕:\n？？？欸？？");
+        Saycontent.Push("林夕仓惶跌落至梦境中。（出现在关卡1入口处）");
+
     }
 }
