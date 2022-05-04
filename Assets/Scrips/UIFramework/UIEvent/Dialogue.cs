@@ -11,7 +11,7 @@ public class Dialogue : MonoBehaviour
     /// <summary>
     /// 对话的文本框
     /// </summary>
-    public Text Say;
+    Text Say;
     /// <summary>
     /// 对话框的显示
     /// </summary>
@@ -28,7 +28,7 @@ public class Dialogue : MonoBehaviour
     /// 保存需要显示的文字
     /// </summary>
     private string words;
-    private string words2;
+    private string words2="";
     /// <summary>
     /// 开始打印文字
     /// </summary>
@@ -37,7 +37,6 @@ public class Dialogue : MonoBehaviour
     /// 是否可以交互
     /// </summary>
     private bool isInteract = false;
-    private bool isOver = true;
     private float timer;//计时器
     private int currentPos = 0;//当前打字位置
     private void Awake()
@@ -46,6 +45,8 @@ public class Dialogue : MonoBehaviour
     }
     void Start()
     {
+        //fa = GameObject.Find("TalkBG");
+        Say = fa.transform.GetChild(0).GetComponent<Text>();
         fa.SetActive(false);
         timer = 0;
         isActive = true;
@@ -77,12 +78,13 @@ public class Dialogue : MonoBehaviour
     void Update()
     {
         //是否可以交互
-        if (College2DReturn.isInteract)
+        if (College2DReturn.Interact)
         {
             ShowDialogue();
         }
 
         OnStartWriter();
+
     }
     /// <summary>
     /// 显示对话
@@ -94,17 +96,20 @@ public class Dialogue : MonoBehaviour
         //按下E后开始对话
         if (Input.GetKeyDown(KeyCode.E))
         {
-            isOver = false;
-
             if (College2DReturn.isPush)
             {
-                switch (College2DReturn.Interact.name)
+                if (College2DReturn.Interact.name == "唱片机")
                 {
-                    case "唱片机":
+                    MusicFrist1();
+                    College2DReturn.isPush = false;
 
-                            break;
-                    case "电脑桌":
-                        break;
+                }
+                else if (College2DReturn.Interact.name == "放大镜")
+                {
+
+                }
+                else if (College2DReturn.Interact.name == "电脑桌")
+                {
 
                 }
                 SayBagin();
@@ -121,9 +126,11 @@ public class Dialogue : MonoBehaviour
                 fa.SetActive(false);
                 Time.timeScale = 1;
 
+
             }
-            else if (!isOver)
+            else
             {
+                Time.timeScale = 0;
                 words = Saycontent.Pop();
                 words2 = words;
                 isActive = true;
@@ -136,7 +143,7 @@ public class Dialogue : MonoBehaviour
     /// </summary>
     public void SayBagin()
     {
-       
+
 
     }
     /// <summary>
@@ -152,17 +159,18 @@ public class Dialogue : MonoBehaviour
             {//判断计时器时间是否到达
                 timer = 0;
                 currentPos++;
-                if (currentPos < words.Length)
+                if (currentPos >= words2.Length)
                 {
-                    Say.text = words.Substring(0, currentPos);//刷新文本显示内容
+                    OnFinish();
                 }
                 else
                 {
-                    OnFinish();
 
+                    Say.text = words.Substring(0, currentPos);//刷新文本显示内容
+                    fa.SetActive(true);
                 }
             }
-            fa.SetActive(true);
+
         }
     }
     /// <summary>
@@ -170,7 +178,6 @@ public class Dialogue : MonoBehaviour
     /// </summary>
     void OnFinish()
     {
-        isOver = true;
         Debug.Log(123);
         isActive = false;
         timer = 0;
@@ -178,6 +185,21 @@ public class Dialogue : MonoBehaviour
         Say.text = words;
 
     }
+    void MusicFrist1()
+    {
+        Saycontent.Push("林夕：这老古董还能运作吗？");
+        Saycontent.Push("林夕：仔细一看……这台唱片机也太旧了吧。");
+        Saycontent.Push("林夕：嚯！竟然还有音乐！");
+    }
+    void MusicFrist2()
+    {
+        Saycontent.Push("△林夕给了唱片机一拳。");
+        Saycontent.Push("林夕：但是东西坏了的时候，我一般这样做。");
+        Saycontent.Push("林夕：虽然我不懂唱片机");
+        Saycontent.Push("播放了5-6秒后，唱片机发出噪音，罢工了。");
+
+    }
+
     void SayForClient1()
     {
         Saycontent.Push("林夕：不用担心，我来搞定它。");
@@ -236,6 +258,29 @@ public class Dialogue : MonoBehaviour
     void SayPart1_1()
     {
         
+        Saycontent.Push("林夕：\n这东西感觉比三头犬还要不妙，还是不要打扰它比较好。");
+
+        Saycontent.Push("林夕：\n呃，这家伙都在梦些什么啊……");
+
+        Saycontent.Push("林夕向前走动，关卡1怪物出现。");
+        Saycontent.Push("林夕:\n这里是，刚才躺着那家伙的梦境？");
+        Saycontent.Push("林夕:\n不过，开玩笑的吧…难道办公桌上的字条是真的。");
+        Saycontent.Push("林夕:\n也是，完全没在工作的人怎么会加班猝死呢。");
+        Saycontent.Push("林夕:\n三头犬都没有，不是地狱啊");
+        Saycontent.Push("林夕左右看看。");
+        Saycontent.Push("林夕:\n…林医生，终于加班过度以身殉职了吗。");
+        Saycontent.Push("林夕:\n这是哪？地狱？");
+        Saycontent.Push("林夕目瞪口呆。");
+        Saycontent.Push("林夕:\n？？？欸？？");
+        Saycontent.Push("林夕仓惶跌落至梦境中。（出现在关卡1入口处）");
+
+    }
+    /// <summary>
+    /// 第一次卷入梦境
+    /// </summary>
+    void SayPart1_1()
+    {
+
         Saycontent.Push("林夕：\n这东西感觉比三头犬还要不妙，还是不要打扰它比较好。");
 
         Saycontent.Push("林夕：\n呃，这家伙都在梦些什么啊……");
