@@ -65,7 +65,6 @@ public class CharacterController2D : MonoBehaviour
 			}
 		}
 
-		Debug.Log(rigbody.velocity.y);
         //下落动画设置
         if (rigbody.velocity.y<-0.1f)
         {
