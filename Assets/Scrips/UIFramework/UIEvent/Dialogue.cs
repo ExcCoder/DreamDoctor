@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class Dialogue : MonoBehaviour
 {
     public static Stack<string> Saycontent;
+    int MusicCount = 0;
     /// <summary>
     /// 对话的文本框
     /// </summary>
@@ -28,7 +29,7 @@ public class Dialogue : MonoBehaviour
     /// 保存需要显示的文字
     /// </summary>
     private string words;
-    private string words2="";
+    private string words2 = "";
     /// <summary>
     /// 开始打印文字
     /// </summary>
@@ -84,13 +85,19 @@ public class Dialogue : MonoBehaviour
                 }
                 else if (College2DReturn.Interact.name == "放大镜")
                 {
-
+                    zoomEvent();
+                    College2DReturn.isPush = false;
                 }
                 else if (College2DReturn.Interact.name == "电脑桌")
                 {
-
+                    SayPaper();
+                    College2DReturn.isPush = false;
                 }
-                SayBagin();
+                else if (College2DReturn.Interact.name =="手电筒" )
+                {
+                    HandLigh();
+                    College2DReturn.isPush = false;
+                }
                 Debug.Log("填装完毕");
                 College2DReturn.isPush = false;
             }
@@ -120,10 +127,14 @@ public class Dialogue : MonoBehaviour
     /// <summary>
     /// 为栈添加文本内容
     /// </summary>
-    public void SayBagin()
+    public void SayPaper()
     {
-        Saycontent.Push("看一下");
-        Saycontent.Push("这有张纸条");
+        Saycontent.Push("林夕：原来是废纸。");
+        Saycontent.Push("林夕：……？");
+        Saycontent.Push("林夕：“梦是一个人与自己内心的真实对话。”——弗洛伊德。请坠入梦境，以解心结。");
+        Saycontent.Push("林夕：这桌上的字条，难道是留给我的吗？");
+        Saycontent.Push("林夕：噢……？");
+
     }
     /// <summary>
     /// 执行打字任务
@@ -236,7 +247,7 @@ public class Dialogue : MonoBehaviour
     /// </summary>
     void SayPart1_1()
     {
-        
+
         Saycontent.Push("林夕：\n这东西感觉比三头犬还要不妙，还是不要打扰它比较好。");
 
         Saycontent.Push("林夕：\n呃，这家伙都在梦些什么啊……");
@@ -253,5 +264,13 @@ public class Dialogue : MonoBehaviour
         Saycontent.Push("林夕:\n？？？欸？？");
         Saycontent.Push("林夕仓惶跌落至梦境中。（出现在关卡1入口处）");
 
+    }
+    void zoomEvent()
+    {
+        Saycontent.Push("镌了精致纹路的金色放大镜，柄上有些磨损的痕迹，看起来经常被使用。");
+    }
+    void HandLigh()
+    {
+        Saycontent.Push("一个手电筒。这不会也是怪物吧……");
     }
 }

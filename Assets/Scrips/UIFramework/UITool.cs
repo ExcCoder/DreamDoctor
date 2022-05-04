@@ -34,6 +34,18 @@ public class UITool
         Debug.LogWarning($"{ activePanel.name}里找不到名为{name}的对象");
         return null;
     }
+    public GameObject FindChildssGameObject(Transform faTF,string ChilderName) 
+    {
+        Transform childTF = faTF.Find(ChilderName);
+        if (childTF!=null) return childTF.gameObject;
+        for (int i = 0; i < faTF.childCount; i++)
+        {
+            childTF = FindChildssGameObject(faTF.GetChild(i), ChilderName).transform;
+            if (childTF != null) return childTF.gameObject;
+        }
+        Debug.LogWarning($"{ faTF.name}里找不到名为{ChilderName}的对象");
+        return null;
+    }
     //根据名称获取一个子对象的组件
     public T GetOrAddComponentInChild<T>(string name) where T : Component
     {
