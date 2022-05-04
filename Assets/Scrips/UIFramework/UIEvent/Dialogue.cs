@@ -2,15 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+/// <summary>
+/// 挂载到角色身上，用于识别标签
+/// </summary>
 public class Dialogue : MonoBehaviour
 {
     Stack<string> Saycontent;
+    /// <summary>
+    /// 对话的文本框
+    /// </summary>
     public Text Say;
     /// <summary>
     /// 对话框的显示
     /// </summary>
     public GameObject fa;
+    /// <summary>
+    /// 可交互的物品
+    /// </summary>
+    private GameObject Interact;
     /// <summary>
     /// 打字时间间隔
     /// </summary>
@@ -23,6 +32,10 @@ public class Dialogue : MonoBehaviour
     /// 开始打印文字
     /// </summary>
     private bool isActive = false;
+    /// <summary>
+    /// 是否可以交互
+    /// </summary>
+    private bool isInteract = false;
     private float timer;//计时器
     private int currentPos = 0;//当前打字位置
     private void Awake()
@@ -37,11 +50,55 @@ public class Dialogue : MonoBehaviour
         charsPerSecond = Mathf.Max(0.2f, charsPerSecond);
 
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
 
+        //如果标签为可交互则触发
+        if (collision.tag == "Insteract")
+        {
+            Interact = collision.gameObject;
+            Interact.transform.GetChild(0).gameObject.SetActive(true);
+
+            isInteract = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (Interact != null)
+        {
+            Interact.transform.GetChild(0).gameObject.SetActive(false);
+            isInteract = false;
+
+        }
+    }
     // Update is called once per frame
     void Update()
     {
-        ShowDialogue();
+        //是否可以交互
+        if (College2DReturn.isInteract)
+        {
+            //
+            ShowDialogue();
+            //是否填充
+            if (College2DReturn.isPush)
+            {
+                if (College2DReturn.Interact != null)
+                {
+                    switch (College2DReturn.Interact.name)
+                    {
+                        case "唱片机":
+                            SayBagin();
+                            break;
+                    }
+
+                }
+            }
+        }
+        else
+        {
+
+        }
+
         OnStartWriter();
     }
     /// <summary>
@@ -49,9 +106,12 @@ public class Dialogue : MonoBehaviour
     /// </summary>
     public void ShowDialogue()
     {
+
+
         //按下E后开始对话
         if (Input.GetKeyDown(KeyCode.E))
         {
+            
             Debug.Log(Saycontent.Count);
             timer = 0;
             currentPos = 0;
@@ -72,7 +132,7 @@ public class Dialogue : MonoBehaviour
     /// <summary>
     /// 为栈添加文本内容
     /// </summary>
-    public void sayHello()
+    public void SayBagin()
     {
         Saycontent.Push("林夕：\n这东西感觉比三头犬还要不妙，还是不要打扰它比较好。");
 
@@ -104,7 +164,7 @@ public class Dialogue : MonoBehaviour
             {//判断计时器时间是否到达
                 timer = 0;
                 currentPos++;
-                if (words !=null)
+                if (words != null)
                 {
                     Say.text = words.Substring(0, currentPos);//刷新文本显示内容
 

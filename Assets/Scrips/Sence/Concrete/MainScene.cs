@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MainScene : SceneState//SceneStart
 {
-    readonly string sceneName = "MainScene";
+    readonly string sceneName = "Level0";
     PanelManager panelManager;
     public override void OnEnter()
     {
