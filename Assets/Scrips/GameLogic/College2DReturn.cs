@@ -36,6 +36,7 @@ public class College2DReturn : MonoBehaviour
             Interact.transform.GetChild(0).gameObject.SetActive(false);
             isPush = false;
             isInteract = false;
+            Dialogue.Saycontent.Clear();
 
         }
     }
