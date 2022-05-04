@@ -15,7 +15,7 @@ public class Dialogue : MonoBehaviour
     /// <summary>
     /// 对话框的显示
     /// </summary>
-    GameObject fa;
+    public GameObject fa;
     /// <summary>
     /// 可交互的物品
     /// </summary>
@@ -45,7 +45,7 @@ public class Dialogue : MonoBehaviour
     }
     void Start()
     {
-        fa = GameObject.Find("TalkBG");
+        //fa = GameObject.Find("TalkBG");
         Say = fa.transform.GetChild(0).GetComponent<Text>();
         fa.SetActive(false);
         timer = 0;
@@ -126,9 +126,11 @@ public class Dialogue : MonoBehaviour
                 fa.SetActive(false);
                 Time.timeScale = 1;
 
+
             }
             else
             {
+                Time.timeScale = 0;
                 words = Saycontent.Pop();
                 words2 = words;
                 isActive = true;
