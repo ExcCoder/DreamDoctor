@@ -74,9 +74,21 @@ public class Dialogue : MonoBehaviour
     /// </summary>
     public void sayHello()
     {
-        Saycontent.Push("B:\n你好daslkdhnashdlahd");
-        Saycontent.Push("A:\n你好啊");
-        Saycontent.Push("C:\n欢迎回来");
+        Saycontent.Push("林夕：\n这东西感觉比三头犬还要不妙，还是不要打扰它比较好。");
+
+        Saycontent.Push("林夕：\n呃，这家伙都在梦些什么啊……");
+
+        Saycontent.Push("林夕向前走动，关卡1怪物出现。");
+        Saycontent.Push("林夕:\n这里是，刚才躺着那家伙的梦境？");
+        Saycontent.Push("林夕:\n不过，开玩笑的吧…难道办公桌上的字条是真的。");
+        Saycontent.Push("林夕:\n也是，完全没在工作的人怎么会加班猝死呢。");
+        Saycontent.Push("林夕:\n三头犬都没有，不是地狱啊");
+        Saycontent.Push("林夕左右看看。");
+        Saycontent.Push("林夕:\n…林医生，终于加班过度以身殉职了吗。");
+        Saycontent.Push("林夕:\n这是哪？地狱？");
+        Saycontent.Push("林夕目瞪口呆。");
+        Saycontent.Push("林夕:\n？？？欸？？");
+        Saycontent.Push("林夕仓惶跌落至梦境中。（出现在关卡1入口处）");
 
     }
     /// <summary>
