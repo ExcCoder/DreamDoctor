@@ -12,7 +12,7 @@ public class InteractMic : BasePanel
         UITool.GetOrAddComponentInChild<Button>("MicChange").onClick.AddListener(() =>
         {
             Pop();
-            Push(new PousePanel());
+            Push(new MicItem());
         });
         UITool.GetOrAddComponentInChild<Button>("MicClick").onClick.AddListener(() =>
         {
