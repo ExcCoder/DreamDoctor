@@ -12,6 +12,7 @@ public class GameRoot : MonoBehaviour
     /// ≥°æ∞π‹¿Ì∆˜
     /// </summary>
     public SceneSystem SceneSystem { get; private set; }
+    public StoryManager StoryManager { get; private set; }
     private void Awake()
     {
         if (Instance == null)
@@ -21,6 +22,7 @@ public class GameRoot : MonoBehaviour
         
         
         SceneSystem = new SceneSystem();
+        StoryManager = new StoryManager();
         DontDestroyOnLoad(gameObject);
     }
     private void Start()

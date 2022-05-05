@@ -52,6 +52,9 @@ public class Dialogue : MonoBehaviour
         isActive = true;
         charsPerSecond = Mathf.Max(0.2f, charsPerSecond);
 
+        GameRoot.Instance.StoryManager.ActionStart.AddListener(
+            action => { Saycontent.Push(action.info.ToString()); }
+        );
     }
     void Update()
     {
@@ -89,8 +92,11 @@ public class Dialogue : MonoBehaviour
                 else if (College2DReturn.Interact.name == "电脑桌")
                 {
 
+                }else if (College2DReturn.Interact.name == "门")
+                {
+                    GameRoot.Instance.StoryManager.Process("门");
                 }
-                SayBagin();
+                    //SayBagin();
                 Debug.Log("填装完毕");
                 College2DReturn.isPush = false;
             }
