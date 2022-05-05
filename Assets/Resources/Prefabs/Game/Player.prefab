@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 8384797619684258020}
   - component: {fileID: 8384797619684258011}
   - component: {fileID: 959297167307504955}
+  - component: {fileID: 7488101466955400563}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -84,6 +85,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 8384797619684258009}
   clip: {fileID: 0}
+  runSpeed: 1.5
 --- !u!114 &8384797619684258009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,7 +100,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpForce: 14
   maxJumpPressingTime: 15
-  runSpeed: 2
   movementSmoothing: 0.05
   airControl: 1
   whatIsGround:
@@ -320,6 +321,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2ee5911114376324eacc1d141f8c28f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7488101466955400563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8384797619684258013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41e2852b6e03dd24aaa09954179a4f20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8384797620542855924
