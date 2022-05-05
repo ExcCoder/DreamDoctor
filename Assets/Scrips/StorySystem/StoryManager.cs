@@ -57,9 +57,13 @@ public class StoryManager
 
     public void NextAction()
     {
-        StoryAction action = curState.actionContent.Dequeue();
-        if (action != null)
+        //StoryAction action = curState.actionContent.Dequeue();
+
+        if (curState.actionContent.Count > 0)
+        {
+            StoryAction action = curState.actionContent.Dequeue();
             ActionStart.Invoke(action);
+        }
         else
             NextState();
     }
