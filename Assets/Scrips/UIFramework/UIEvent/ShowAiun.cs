@@ -5,55 +5,25 @@ using UnityEngine.UI;
 
 public class ShowAiun : MonoBehaviour
 {
-    private RectTransform Aiun;
+    public Animator Ani;
     public Text text;
-    bool IsShow = false;
-    int count = 1;
-    bool Pause = true;
-    private void Start()
+    int count =0;
+    public void Change()
     {
-        Aiun = this.gameObject.GetComponent<RectTransform>();
-        text.text = "《";
-    }
-    void Update()
-    {
-        if (IsShow&&!Pause)
+        count++;
+       
+        
+        if (count >1)
         {
-            Aiun.transform.Translate(new Vector3(10, 0, 0) * -50 * Time.deltaTime);
+            text.text = "《";
 
-            if (Aiun.anchoredPosition.x < 700)
-            {
-                Pause = true;
-            }
-
+            count = 0;
         }
-        if (!IsShow&&!Pause)
+        else
         {
-            Aiun.transform.Translate(new Vector3(10, 0, 0) * 50 * Time.deltaTime);
-            if (Aiun.anchoredPosition.x > 923)
-            {
-                Pause = true;
-            }
-            
-        }
-    }
-    public void Clicl()
-    {
-        Pause = false;
-        Debug.Log("点击了展示窗体");
-        //展开
-        if (count==1)
-        {
-            count++;
-            IsShow = true;
             text.text = "》";
-        }else
-        //收起
-        if (count==2)
-        {
-                text.text = "《";
-                IsShow = false;
-                count = 1;
         }
+        Ani.SetInteger("change", count);
     }
+
 }

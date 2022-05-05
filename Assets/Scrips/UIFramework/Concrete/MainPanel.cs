@@ -15,9 +15,10 @@ public class MainPanel : BasePanel
             //点击事件可以写在这里面
             Debug.Log("暂停按钮被点了");
             Push(new PousePanel());
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
         });
         UITool.GetOrAddComponentInChild<Transform>("TalkBG").gameObject.SetActive(false);
+
     }
-    
+
 }
