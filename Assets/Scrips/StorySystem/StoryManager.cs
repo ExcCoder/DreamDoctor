@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class StoryManager
 {
     public static GraphAdjList<StoryState> StateGraph;
+    //unityÊÂ¼þ£¬
     public UnityEvent<StoryAction> ActionStart = new UnityEvent<StoryAction>();
 
     private StoryState curState;

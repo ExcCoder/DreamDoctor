@@ -1,127 +1,17 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Node<T>
-{
-    private T data; //Êı¾İÓò
-                    //¹¹ÔìÆ÷
-    public Node(T v)
-    {
-        data = v;
-    }
-    //Êı¾İÓòÊôĞÔ
-    public T Data
-    {
-        get
-        {
-            return data;
-        }
-        set
-        {
-            data = value;
-        }
-    }
-}
 /// <summary>
-/// ÎŞÏòÍ¼ÁÚ½Ó±íÀàµÄÊµÏÖ
+/// 
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public class adjListNode<T>
+public class GraphAdjList<T>
 {
-    private int adjvex;//ÁÚ½Ó¶¥µã
-    private adjListNode<T> next;//ÏÂÒ»¸öÁÚ½Ó±í½áµã
-
-    //ÁÚ½Ó¶¥µãÊôĞÔ
-    public int Adjvex
-    {
-        get { return adjvex; }
-        set { adjvex = value; }
-    }
-
-    //ÏÂÒ»¸öÁÚ½Ó±í½áµãÊôĞÔ
-    public adjListNode<T> Next
-    {
-        get { return next; }
-        set { next = value; }
-    }
-
-    public adjListNode(int vex)
-    {
-        adjvex = vex;
-        next = null;
-    }
-}
-
-/// <summary>
-/// ÎŞÏòÍ¼ÁÚ½Ó±íµÄ¶¥µã½áµãÀà
-/// </summary>
-/// <typeparam name="T"></typeparam>
-public class VexNode<T>
-{
-    private Node<T> data; //Í¼µÄ¶¥µã
-    private adjListNode<T> firstAdj; //ÁÚ½Ó±íµÄµÚ1¸ö½áµã
-
-    public Node<T> Data
-    {
-        get { return data; }
-        set { data = value; }
-    }
-
-    //ÁÚ½Ó±íµÄµÚ1¸ö½áµãÊôĞÔ
-    public adjListNode<T> FirstAdj
-    {
-        get { return firstAdj; }
-        set { firstAdj = value; }
-    }
-
-    //¹¹ÔìÆ÷
-    public VexNode()
-    {
-        data = null;
-        firstAdj = null;
-    }
-
-    //¹¹ÔìÆ÷
-    public VexNode(Node<T> nd)
-    {
-        data = nd;
-        firstAdj = null;
-    }
-
-    //¹¹ÔìÆ÷
-    public VexNode(Node<T> nd, adjListNode<T> alNode)
-    {
-        data = nd;
-        firstAdj = alNode;
-    }
-}
-
-public interface IGraph<T>
-{
-    //»ñÈ¡¶¥µãÊı
-    int GetNumOfVertex();
-    //»ñÈ¡±ß»ò»¡µÄÊıÄ¿
-    int GetNumOfEdge();
-    //ÔÚÁ½¸ö¶¥µãÖ®¼äÌí¼ÓÈ¨ÎªvµÄ±ß»ò»¡
-    void SetEdge(Node<T> v1, Node<T> v2, int v);
-    //É¾³ıÁ½¸ö¶¥µãÖ®¼äµÄ±ß»ò»¡
-    void DelEdge(Node<T> v1, Node<T> v2);
-    //ÅĞ¶ÏÁ½¸ö¶¥µãÖ®¼äÊÇ·ñÓĞ±ß»ò»¡
-    bool IsEdge(Node<T> v1, Node<T> v2);
-}
-
-/// <summary>
-/// ÎŞÏòÍ¼ÁÚ½Ó±íÀà
-/// </summary>
-/// <typeparam name="T"></typeparam>
-public class GraphAdjList<T> : IGraph<T>
-{
-    //ÁÚ½Ó±íÊı×é
+    //é‚»æ¥è¡¨æ•°ç»„
     private VexNode<T>[] adjList;
 
-    //Ë÷ÒıÆ÷
+    //ç´¢å¼•å™¨
     public VexNode<T> this[int index]
     {
         get
@@ -134,7 +24,7 @@ public class GraphAdjList<T> : IGraph<T>
         }
     }
 
-    //¹¹ÔìÆ÷
+    //æ„é€ å™¨
     public GraphAdjList(Node<T>[] nodes)
     {
         adjList = new VexNode<T>[nodes.Length];
@@ -147,13 +37,13 @@ public class GraphAdjList<T> : IGraph<T>
     }
 
 
-    //»ñÈ¡¶¥µãµÄÊıÄ¿
+    //è·å–é¡¶ç‚¹çš„æ•°ç›®
     public int GetNumOfVertex()
     {
         return adjList.Length;
     }
 
-    //»ñÈ¡±ßµÄÊıÄ¿
+    //è·å–è¾¹çš„æ•°ç›®
     public int GetNumOfEdge()
     {
         int i = 0;
@@ -168,16 +58,16 @@ public class GraphAdjList<T> : IGraph<T>
             }
         }
 
-        return i / 2;//ÎŞÏòÍ¼
+        return i / 2;//æ— å‘å›¾
     }
 
-    //ÅĞ¶ÏvÊÇ·ñÊÇÍ¼µÄ¶¥µã
+    //åˆ¤æ–­væ˜¯å¦æ˜¯å›¾çš„é¡¶ç‚¹
     public bool IsNode(Node<T> v)
     {
-        //±éÀúÁÚ½Ó±íÊı×é
+        //éå†é‚»æ¥è¡¨æ•°ç»„
         foreach (VexNode<T> nd in adjList)
         {
-            //Èç¹ûvµÈÓÚndµÄdata£¬ÔòvÊÇÍ¼ÖĞµÄ¶¥µã£¬·µ»Øtrue
+            //å¦‚æœvç­‰äºndçš„dataï¼Œåˆ™væ˜¯å›¾ä¸­çš„é¡¶ç‚¹ï¼Œè¿”å›true
             if (v.Equals(nd.Data))
             {
                 return true;
@@ -186,14 +76,14 @@ public class GraphAdjList<T> : IGraph<T>
         return false;
     }
 
-    //»ñÈ¡¶¥µãvÔÚÁÚ½Ó±íÊı×éÖĞµÄË÷Òı
+    //è·å–é¡¶ç‚¹våœ¨é‚»æ¥è¡¨æ•°ç»„ä¸­çš„ç´¢å¼•
     public int GetIndex(Node<T> v)
     {
         int i = -1;
-        //±éÀúÁÚ½Ó±íÊı×é
+        //éå†é‚»æ¥è¡¨æ•°ç»„
         for (i = 0; i < adjList.Length; ++i)
         {
-            //ÁÚ½Ó±íÊı×éµÚiÏîµÄdataÖµµÈÓÚv£¬Ôò¶¥µãvµÄË÷ÒıÎªi
+            //é‚»æ¥è¡¨æ•°ç»„ç¬¬ié¡¹çš„dataå€¼ç­‰äºvï¼Œåˆ™é¡¶ç‚¹vçš„ç´¢å¼•ä¸ºi
             if (adjList[i].Data.Equals(v))
             {
                 return i;
@@ -202,10 +92,10 @@ public class GraphAdjList<T> : IGraph<T>
         return i;
     }
 
-    //ÅĞ¶Ïv1ºÍv2Ö®¼äÊÇ·ñ´æÔÚ±ß
+    //åˆ¤æ–­v1å’Œv2ä¹‹é—´æ˜¯å¦å­˜åœ¨è¾¹
     public bool IsEdge(Node<T> v1, Node<T> v2)
     {
-        //v1»òv2²»ÊÇÍ¼µÄ¶¥µã
+        //v1æˆ–v2ä¸æ˜¯å›¾çš„é¡¶ç‚¹
         if (!IsNode(v1) || !IsNode(v2))
         {
             Debug.Log("Node is not belong to Graph!");
@@ -225,47 +115,47 @@ public class GraphAdjList<T> : IGraph<T>
         return false;
     }
 
-    //ÔÚ¶¥µãv1ºÍv2Ö®¼äÌí¼ÓÈ¨ÖµÎªvµÄ±ß
+    //åœ¨é¡¶ç‚¹v1å’Œv2ä¹‹é—´æ·»åŠ æƒå€¼ä¸ºvçš„è¾¹
     public void SetEdge(Node<T> v1, Node<T> v2, int v)
     {
-        //v1»òv2²»ÊÇÍ¼µÄ¶¥µã»òÕßv1ºÍv2Ö®¼ä´æÔÚ±ß
+        //v1æˆ–v2ä¸æ˜¯å›¾çš„é¡¶ç‚¹æˆ–è€…v1å’Œv2ä¹‹é—´å­˜åœ¨è¾¹
         if (!IsNode(v1) || !IsNode(v2) || IsEdge(v1, v2))
         {
             Debug.Log("Node is not belong to Graph!");
             return;
         }
 
-        //È¨Öµ²»¶Ô
+        //æƒå€¼ä¸å¯¹
         if (v != 1)
         {
             Debug.Log("Weight is not right!");
             return;
         }
 
-        //´¦Àí¶¥µãv1µÄÁÚ½Ó±í
+        //å¤„ç†é¡¶ç‚¹v1çš„é‚»æ¥è¡¨
         adjListNode<T> p = new adjListNode<T>(GetIndex(v2));
 
         if (adjList[GetIndex(v1)].FirstAdj == null)
         {
             adjList[GetIndex(v1)].FirstAdj = p;
         }
-        //¶¥µãv1ÓĞÁÚ½Ó¶¥µã
+        //é¡¶ç‚¹v1æœ‰é‚»æ¥é¡¶ç‚¹
         else
         {
             p.Next = adjList[GetIndex(v1)].FirstAdj;
             adjList[GetIndex(v1)].FirstAdj = p;
         }
 
-        //´¦Àí¶¥µãv2µÄÁÚ½Ó±í
+        //å¤„ç†é¡¶ç‚¹v2çš„é‚»æ¥è¡¨
         p = new adjListNode<T>(GetIndex(v1));
 
-        //¶¥µãv2Ã»ÓĞÁÚ½Ó¶¥µã
+        //é¡¶ç‚¹v2æ²¡æœ‰é‚»æ¥é¡¶ç‚¹
         if (adjList[GetIndex(v2)].FirstAdj == null)
         {
             adjList[GetIndex(v2)].FirstAdj = p;
         }
 
-        //¶¥µãv2ÓĞÁÚ½Ó¶¥µã
+        //é¡¶ç‚¹v2æœ‰é‚»æ¥é¡¶ç‚¹
         else
         {
             p.Next = adjList[GetIndex(v2)].FirstAdj;
@@ -273,20 +163,20 @@ public class GraphAdjList<T> : IGraph<T>
         }
     }
 
-    //É¾³ı¶¥µãv1ºÍv2Ö®¼äµÄ±ß
+    //åˆ é™¤é¡¶ç‚¹v1å’Œv2ä¹‹é—´çš„è¾¹
     public void DelEdge(Node<T> v1, Node<T> v2)
     {
-        //v1»òv2²»ÊÇÍ¼µÄ¶¥µã
+        //v1æˆ–v2ä¸æ˜¯å›¾çš„é¡¶ç‚¹
         if (!IsNode(v1) || !IsNode(v2))
         {
             Debug.Log("Node is not belong to Graph!");
             return;
         }
 
-        //¶¥µãv1Óëv2Ö®¼äÓĞ±ß
+        //é¡¶ç‚¹v1ä¸v2ä¹‹é—´æœ‰è¾¹
         if (IsEdge(v1, v2))
         {
-            //´¦Àí¶¥µãv1µÄÁÚ½Ó±íÖĞµÄ¶¥µãv2µÄÁÚ½Ó±í½áµã
+            //å¤„ç†é¡¶ç‚¹v1çš„é‚»æ¥è¡¨ä¸­çš„é¡¶ç‚¹v2çš„é‚»æ¥è¡¨ç»“ç‚¹
             adjListNode<T> p = adjList[GetIndex(v1)].FirstAdj;
             adjListNode<T> pre = null;
 
@@ -300,7 +190,7 @@ public class GraphAdjList<T> : IGraph<T>
             }
             pre.Next = p.Next;
 
-            //´¦Àí¶¥µãv2µÄÁÚ½Ó±íÖĞµÄ¶¥µãv1µÄÁÚ½Ó±í½áµã
+            //å¤„ç†é¡¶ç‚¹v2çš„é‚»æ¥è¡¨ä¸­çš„é¡¶ç‚¹v1çš„é‚»æ¥è¡¨ç»“ç‚¹
             p = adjList[GetIndex(v2)].FirstAdj;
             pre = null;
 

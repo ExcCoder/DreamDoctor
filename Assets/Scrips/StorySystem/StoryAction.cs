@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+/// <summary>
+/// 故事活动
+/// </summary>
 public class StoryAction
     {
         public string targetName;
