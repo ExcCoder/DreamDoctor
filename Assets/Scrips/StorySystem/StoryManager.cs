@@ -18,7 +18,7 @@ public class StoryManager
         curState.SetActive(true);
         activeStateList.Add(curState);
     }
-
+    //初始化图结构
     void InitGraph()
     {
         //----数据来源------
