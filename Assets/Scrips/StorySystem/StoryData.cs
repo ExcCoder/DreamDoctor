@@ -23,6 +23,7 @@ public class StoryData
         actionContent.Enqueue(new StoryAction("对话框", "显示对话", "让我看看办公室里都有些什么。"));
         state = new StoryState(0,"林夕进门","门",actionContent);
         states.Add(state);
+        
         //1
         actionContent = new Queue<StoryAction>();
         actionContent.Enqueue(new StoryAction("对话框", "显示对话", "噢……？"));
@@ -46,6 +47,16 @@ public class StoryData
         actionContent.Enqueue(new StoryAction("对话框", "显示对话", "很好"));
         state = new StoryState(2,"查看唱片机-1", "唱片机", actionContent);
         states.Add(state);
+
+        actionContent = new Queue<StoryAction>();
+        actionContent.Enqueue(new StoryAction("对话框","显示对话", "林夕：噢……？"));
+        actionContent.Enqueue(new StoryAction("对话框","显示对话", "林夕：这桌上的字条，难道是留给我的吗？"));
+        actionContent.Enqueue(new StoryAction("对话框", "显示对话", "林夕：“梦是一个人与自己内心的真实对话。”——弗洛伊德。请坠入梦境，以解心结。"));
+        actionContent.Enqueue(new StoryAction("对话框", "显示对话", "林夕：“林夕：……？"));
+        actionContent.Enqueue(new StoryAction("对话框", "显示对话", "林夕：“林夕：原来是废纸。"));
+        state = new StoryState(3,"查看纸条","纸条",actionContent);
+        states.Add(state);
+
         return states;
     }
 

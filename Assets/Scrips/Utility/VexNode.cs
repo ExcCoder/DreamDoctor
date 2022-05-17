@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-  public  class VexNode<T>
+/// <summary>
+/// 无向图邻接表的顶点结点类
+/// </summary>
+/// <typeparam name="T"></typeparam>
+public class VexNode<T>
     {
         private Node<T> data; //图的顶点
         private adjListNode<T> firstAdj; //邻接表的第1个结点

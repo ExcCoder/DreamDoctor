@@ -5,11 +5,16 @@ using UnityEngine.Events;
 
 public class StoryManager
 {
-    public static GraphAdjList<StoryState> StateGraph;
+    public static StateGraph<StoryState> StateGraph;
     //unity事件，
     public UnityEvent<StoryAction> ActionStart = new UnityEvent<StoryAction>();
-
+    /// <summary>
+    /// 当前状态
+    /// </summary>
     private StoryState curState;
+    /// <summary>
+    /// 状态列表
+    /// </summary>
     private List<StoryState> activeStateList = new List<StoryState>();
 
     public StoryManager()
@@ -31,51 +36,69 @@ public class StoryManager
         for (int i = 0; i < nodesNum; i++)
         {
             nodes[i] = new Node<StoryState>(states[i]);
+            Debug.Log(nodes[i].Data.state_id);
         }
-        StateGraph = new GraphAdjList<StoryState>(nodes);
+        StateGraph = new StateGraph<StoryState>(nodes);
         //----初始化边----
         List<(StoryState, StoryState)> edges = storyData.GetEdgesList();
         for (int i = 0; i < edges.Count; i++)
         {
+            Debug.Log(edges[i].Item1.state_id+"--"+edges[i].Item2.state_id);
             Node<StoryState> v1 = new Node<StoryState>(edges[i].Item1);
             Node<StoryState> v2 = new Node<StoryState>(edges[i].Item2);
             StateGraph.SetEdge(v1, v2, 1);
-        } 
-    }
-
-    public void Process(string trigger_id)
-    {
-        foreach (var item in activeStateList)
-        {
-            Debug.Log(item.trigger_id);
-            if (item.trigger_id == trigger_id && item.isActive == true)
-            {
-                curState = item;
-                NextAction();
-            }
         }
     }
-
-    public void NextAction()
+    /// <summary>
+    /// 获取触发id来确定当前流程
+    /// </summary>
+    /// <param name="trigger_id"></param>
+    public void Process(string trigger_id)
+    {
+        for (int i = 0; i < activeStateList.Count; i++)
+        {
+            Debug.Log(curState.trigger_id);
+            if (activeStateList[i].trigger_id == trigger_id && activeStateList[i].isActive == true)
+            {
+                curState = activeStateList[i];
+                NextAction();
+                break;
+            }
+        }
+        
+    }
+    //修改成了私有方法
+    private void NextAction()
     {
         //StoryAction action = curState.actionContent.Dequeue();
 
         if (curState.actionContent.Count > 0)
         {
+            //Pop一个对话内容
             StoryAction action = curState.actionContent.Dequeue();
             ActionStart.Invoke(action);
         }
         else
+        {
+            activeStateList.Remove(curState);
             NextState();
-    }
+        }
 
-    public void NextState()
+    }
+    //修改成了私有方法
+
+    private void NextState()
     {
-        adjListNode<StoryState> adjNode = StateGraph.GetAdjacentNode(curState.index);
-        while (adjNode!= null)
+        Debug.Log("nextState");
+        //获取
+        adjListNode<StoryState> adjNode = StateGraph.GetNextNode(curState.index);
+        while (adjNode != null)
         {
             StoryState state = StateGraph[adjNode.Adjvex].Data.Data;
             state.SetActive(true); //其实这句话是有问题的，问题在于多个入度的State要让所有入度都满足才可以解锁。
+            activeStateList.Add(state);
+            Debug.Log(state.state_id);
+            adjNode = adjNode.Next;
         }
     }
 }

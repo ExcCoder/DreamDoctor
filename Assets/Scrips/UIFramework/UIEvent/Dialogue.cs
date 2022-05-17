@@ -7,8 +7,8 @@ using UnityEngine.UI;
 /// </summary>
 public class Dialogue : MonoBehaviour
 {
-    public static Stack<string> Saycontent;
-    int MusicCount = 0;
+    public static Stack<string> Saycontent = new Stack<string>();
+    //int MusicCount = 0;
     /// <summary>
     /// 对话的文本框
     /// </summary>
@@ -42,7 +42,7 @@ public class Dialogue : MonoBehaviour
     private int currentPos = 0;//当前打字位置
     private void Awake()
     {
-        Saycontent = new Stack<string>();
+       
     }
     void Start()
     {
@@ -52,10 +52,11 @@ public class Dialogue : MonoBehaviour
         timer = 0;
         isActive = true;
         charsPerSecond = Mathf.Max(0.2f, charsPerSecond);
-
-        GameRoot.Instance.StoryManager.ActionStart.AddListener(
-            action => { Saycontent.Push(action.info.ToString()); }
-        );
+        //给unityEvent添加了一个方法 action
+        GameRoot.Instance.StoryManager.ActionStart.AddListener
+            (action => {
+                    Saycontent.Push(action.info.ToString());
+            });
     }
     void Update()
     {
@@ -78,36 +79,33 @@ public class Dialogue : MonoBehaviour
         //按下E后开始对话
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (College2DReturn.isPush)
-            {
-                if (College2DReturn.Interact.name == "唱片机")
-                {
-                    MusicFrist1();
-                    College2DReturn.isPush = false;
+            /*  if (College2DReturn.isPush)
+              {
+                  if (College2DReturn.Interact.name == "唱片机")
+                  {
+                      GameRoot.Instance.StoryManager.Process("唱片机");
+                  }
+                  else if (College2DReturn.Interact.name == "放大镜")
+                  {
+                      zoomEvent();
+                      College2DReturn.isPush = false;
+                  }
+                  else if (College2DReturn.Interact.name == "电脑桌")
+                  {
+                      GameRoot.Instance.StoryManager.Process("办公桌");
 
-                }
-                else if (College2DReturn.Interact.name == "放大镜")
-                {
-                    zoomEvent();
-                    College2DReturn.isPush = false;
-                }
-                else if (College2DReturn.Interact.name == "电脑桌")
-                {
-                    SayPaper();
-                    College2DReturn.isPush = false;
-
-                }else if (College2DReturn.Interact.name == "门")
-                {
-                    GameRoot.Instance.StoryManager.Process("门");
-                }
-                else if (College2DReturn.Interact.name =="手电筒" )
-                {
-                    HandLigh();
-                    College2DReturn.isPush = false;
-                }
-                Debug.Log("填装完毕");
-                College2DReturn.isPush = false;
-            }
+                  }else if (College2DReturn.Interact.name == "门")
+                  {
+                      GameRoot.Instance.StoryManager.Process("门");
+                  }
+                  else if (College2DReturn.Interact.name =="手电筒" )
+                  {
+                      HandLigh();
+                      College2DReturn.isPush = false;
+                  }
+                  Debug.Log("填装完毕");
+                  College2DReturn.isPush = false;
+              }*/
             Debug.Log("栈存储的数量" + Saycontent.Count);
             timer = 0;
             currentPos = 0;
@@ -279,5 +277,21 @@ public class Dialogue : MonoBehaviour
     void HandLigh()
     {
         Saycontent.Push("一个手电筒。这不会也是怪物吧……");
+    }
+
+
+    public void ExecuteAction(StoryAction action)
+    {
+        switch (action.actionName)
+        {
+            case "显示对话":
+                ShowDialog(action.info as string);
+                break;
+        }
+
+    }
+    void ShowDialog(string msg)
+    {
+        Saycontent.Push(msg);
     }
 }

@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+/// <summary>
+/// 无向图邻接表类的实现
+/// </summary>
+/// <typeparam name="T"></typeparam>
 public class adjListNode<T>
 {
     private int adjvex;//邻接顶点

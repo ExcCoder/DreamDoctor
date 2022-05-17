@@ -6,7 +6,7 @@ using UnityEngine;
 /// 
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public class GraphAdjList<T>
+public class StateGraph<T>
 {
     //邻接表数组
     private VexNode<T>[] adjList;
@@ -25,8 +25,9 @@ public class GraphAdjList<T>
     }
 
     //构造器
-    public GraphAdjList(Node<T>[] nodes)
+    public StateGraph(Node<T>[] nodes)
     {
+        //初始化索引器
         adjList = new VexNode<T>[nodes.Length];
         for (int i = 0; i < nodes.Length; ++i)
         {
@@ -60,7 +61,12 @@ public class GraphAdjList<T>
 
         return i / 2;//无向图
     }
+    //插入节点
+    //添加边
+    public void InsertEdges(Node<T> v1,Node<T> v2,int weight)
+    {
 
+    }
     //判断v是否是图的顶点
     public bool IsNode(Node<T> v)
     {
@@ -205,8 +211,12 @@ public class GraphAdjList<T>
             pre.Next = p.Next;
         }
     }
-
-    public adjListNode<T> GetAdjacentNode(int index)
+    /// <summary>
+    /// 通过下标获取无向图链接表
+    /// </summary>
+    /// <param name="index">下标</param>
+    /// <returns></returns>
+    public adjListNode<T> GetNextNode(int index)
     {
         return adjList[index].FirstAdj;
     }

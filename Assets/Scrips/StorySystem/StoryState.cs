@@ -4,9 +4,21 @@ using UnityEngine;
 
 public class StoryState
 {
+    /// <summary>
+    /// 状态下标
+    /// </summary>
     public int index;
+    /// <summary>
+    /// 是否可活动
+    /// </summary>
     public bool isActive;
+    /// <summary>
+    /// 状态id
+    /// </summary>
     public string state_id;
+    /// <summary>
+    /// 触发器获取的状态
+    /// </summary>
     public string trigger_id;
     public Queue<StoryAction> actionContent;
 
@@ -22,6 +34,12 @@ public class StoryState
     public void SetActive(bool flag)
     {
         isActive = flag;
+    }
+
+    public override bool Equals(object obj)
+    {
+        StoryState state = obj as StoryState;
+        return state.state_id.Equals(this.state_id);
     }
 }
 

@@ -23,4 +23,10 @@ using UnityEngine;
         }
     }
 
+    public override bool Equals(object obj)
+    {
+        Node<T> node = obj as Node<T>;
+        return node.data.Equals(this.data);        
+    }
+
 }
