@@ -14,55 +14,55 @@ public class StoryData
         //------------------------------------------
         //0
         actionContent = new Queue<StoryAction>();
-        string[] content = new string[7];
-        content[0] = "呼~";
-        content[1] = "虽然好不容易弄到这个心理咨询师的职位~";
-        content[2] = "不过心理咨询……到底是做什么的来着？";
-        content[3] = "……";
-        content[4] = "不管了，要是真的有倒霉蛋不幸跨入了这个诊所，就让他们睡一觉好了";
-        content[5] = "世上没有睡一觉解决不了的事情。";
-        content[6] = "让我看看办公室里都有些什么。";
-        actionContent.Enqueue(new StoryAction("对话框", "显示对话", content));
-        state = new StoryState(0,"林夕进门","门",actionContent);
+        string[] TalkContent = new string[7];
+        TalkContent[0] = "呼~";
+        TalkContent[1] = "虽然好不容易弄到这个心理咨询师的职位~";
+        TalkContent[2] = "不过心理咨询……到底是做什么的来着？";
+        TalkContent[3] = "……";
+        TalkContent[4] = "不管了，要是真的有倒霉蛋不幸跨入了这个诊所，就让他们睡一觉好了";
+        TalkContent[5] = "世上没有睡一觉解决不了的事情。";
+        TalkContent[6] = "让我看看办公室里都有些什么。";
+        actionContent.Enqueue(new StoryAction("对话框", "显示对话", TalkContent));
+        state = new StoryState(0, "林夕进门", "门", actionContent);
         states.Add(state);
-        
+
         //1
+        TalkContent = new string[4];
+
         actionContent = new Queue<StoryAction>();
-        actionContent.Enqueue(new StoryAction("对话框", "显示对话", "噢……？"));
-        actionContent.Enqueue(new StoryAction("对话框", "显示对话", "这桌上的字条，难道是留给我的吗？"));
-        actionContent.Enqueue(new StoryAction("对话框", "显示对话", "“梦是一个人与自己内心的真实对话。”——弗洛伊德。请坠入梦境，以解心结。"));
-        actionContent.Enqueue(new StoryAction("对话框", "显示对话", "……？"));
-        actionContent.Enqueue(new StoryAction("对话框", "显示对话", "原来是废纸。"));
-        state = new StoryState(1,"查看办公桌", "办公桌", actionContent);
+        TalkContent[0] = "嚯！竟然还有音乐！";
+        TalkContent[1] = "仔细一看……这台唱片机也太旧了吧。";
+        TalkContent[2] = "这老古董还能运作吗？";
+        //actionContent.Enqueue(new StoryAction("唱片机", "播放唱片", "歌曲1"));
+        TalkContent[3] = "……";
+        actionContent.Enqueue(new StoryAction("对话框", "显示对话", TalkContent));
+        actionContent.Enqueue(new StoryAction("林夕", "抽烟", null));
+        TalkContent = new string[2];
+        TalkContent[0] = "虽然我不懂唱片机，";
+        TalkContent[1] = "但是东西坏了的时候，我一般这样做。";
+        actionContent.Enqueue(new StoryAction("对话框", "显示对话", TalkContent));
+        actionContent.Enqueue(new StoryAction("唱片机", "播放唱片", "抖动"));
+        TalkContent = new string[1];
+        TalkContent[0] = "很好";
+        actionContent.Enqueue(new StoryAction("对话框", "显示对话", TalkContent));
+
+        state = new StoryState(2, "查看唱片机-1", "唱片机", actionContent);
         states.Add(state);
         //2
+        TalkContent = new string[5];
         actionContent = new Queue<StoryAction>();
-        actionContent.Enqueue(new StoryAction("对话框", "显示对话", "嚯！竟然还有音乐！"));
-        actionContent.Enqueue(new StoryAction("对话框", "显示对话", "仔细一看……这台唱片机也太旧了吧。"));
-        actionContent.Enqueue(new StoryAction("对话框", "显示对话", "这老古董还能运作吗？"));
-        actionContent.Enqueue(new StoryAction("唱片机", "播放唱片", "歌曲1"));
-        actionContent.Enqueue(new StoryAction("对话框", "显示对话", "……"));
-        actionContent.Enqueue(new StoryAction("林夕", "抽烟",null));
-        actionContent.Enqueue(new StoryAction("对话框", "显示对话", "虽然我不懂唱片机，"));
-        actionContent.Enqueue(new StoryAction("对话框", "显示对话", "但是东西坏了的时候，我一般这样做。"));
-        actionContent.Enqueue(new StoryAction("唱片机", "播放唱片", "抖动"));
-        actionContent.Enqueue(new StoryAction("对话框", "显示对话", "很好"));
-        state = new StoryState(2,"查看唱片机-1", "唱片机", actionContent);
+        TalkContent[0] = "噢……？";
+        TalkContent[1] = "这桌上的字条，难道是留给我的吗？";
+        TalkContent[2] = "“梦是一个人与自己内心的真实对话。”——弗洛伊德。请坠入梦境，以解心结。";
+        TalkContent[3] = "……？";
+        TalkContent[4] = "原来是废纸。";
+        actionContent.Enqueue(new StoryAction("对话框", "显示对话", TalkContent));
+        state = new StoryState(3, "查看纸条", "纸条", actionContent);
         states.Add(state);
-
-        actionContent = new Queue<StoryAction>();
-        actionContent.Enqueue(new StoryAction("对话框","显示对话", "林夕：噢……？"));
-        actionContent.Enqueue(new StoryAction("对话框","显示对话", "林夕：这桌上的字条，难道是留给我的吗？"));
-        actionContent.Enqueue(new StoryAction("对话框", "显示对话", "林夕：“梦是一个人与自己内心的真实对话。”——弗洛伊德。请坠入梦境，以解心结。"));
-        actionContent.Enqueue(new StoryAction("对话框", "显示对话", "林夕：“林夕：……？"));
-        actionContent.Enqueue(new StoryAction("对话框", "显示对话", "林夕：“林夕：原来是废纸。"));
-        state = new StoryState(3,"查看纸条","纸条",actionContent);
-        states.Add(state);
-
         return states;
     }
 
-    public List<(StoryState,StoryState)> GetEdgesList()
+    public List<(StoryState, StoryState)> GetEdgesList()
     {
         transitions = new List<(StoryState, StoryState)>();
         transitions.Add((states[0], states[1]));

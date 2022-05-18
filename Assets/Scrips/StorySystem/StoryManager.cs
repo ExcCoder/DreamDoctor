@@ -101,4 +101,9 @@ public class StoryManager
             adjNode = adjNode.Next;
         }
     }
+
+    public void EndAction()
+    {
+        NextAction();
+    }
 }

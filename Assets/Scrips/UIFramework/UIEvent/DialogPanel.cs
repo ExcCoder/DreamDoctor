@@ -8,11 +8,15 @@ public class DialogPanel : MonoBehaviour
     private static Queue<string> saycontent = new Queue<string>();
     public Text text;
     private GameObject BG;
+    private string[] GetContent;
     private float charsPerSecond = 0.2f;
     private float timer;//计时器
     private bool isActive; //是否开启打字
+    private bool isPush; //是否可以文字交互
     private int currentPos = 0;//当前打字位置
     private string sentence;
+    private string selfName = "对话框";
+
 
     public static Queue<string> Saycontent { get => saycontent; set => saycontent = value; }
 
@@ -21,12 +25,15 @@ public class DialogPanel : MonoBehaviour
         BG = GameObject.Find("TalkBG");
         BG.gameObject.SetActive(false);
         timer = 0;
-        isActive = true;
+        isActive = false;
+        isPush = false;
         charsPerSecond = Mathf.Max(0.2f, charsPerSecond);
         //给unityEvent添加了一个方法 action
         GameRoot.Instance.StoryManager.ActionStart.AddListener
-            (action => {
-                ExecuteAction(action);
+            (action =>
+            {
+                if(action.targetName.Equals(selfName))
+                    ExecuteAction(action);
             });
     }
     public void ExecuteAction(StoryAction action)
@@ -35,31 +42,28 @@ public class DialogPanel : MonoBehaviour
         {
             case "显示对话":
                 Debug.Log(action.actionName);
-                ShowDialog(action.info as string[]);
+                GetContent = action.info as string[];
+                for (int i = 0; i < GetContent.Length; i++)
+                {
+                    Saycontent.Enqueue(GetContent[i]);
+                }
+                isPush = true;
                 break;
         }
     }
-
-    void ShowDialog(string[] msg)
+    void ShowDialog()
     {
         timer = 0;
         currentPos = 0;
-
-        Debug.Log(msg[0]);
-        for (int i = 0; i < msg.Length; i++)
-        {
-            Saycontent.Enqueue(msg[i]);
-        }
-        
-
         Debug.Log("栈存储的数量" + Saycontent.Count);
         //栈为空时退出对话并且继续游戏
         if (Saycontent.Count == 0)
         {
             Debug.Log("空");
-            isActive = false;
             BG.gameObject.SetActive(false);
             Time.timeScale = 1;
+            isPush = false;
+            GameRoot.Instance.StoryManager.EndAction();
         }
         else
         {
@@ -68,9 +72,7 @@ public class DialogPanel : MonoBehaviour
             sentence = Saycontent.Dequeue();
             isActive = true;
         }
-        OnStartWriter();
     }
-
     /// <summary>
     /// 执行打字任务
     /// </summary>
@@ -96,6 +98,20 @@ public class DialogPanel : MonoBehaviour
             }
         }
     }
+    private void FixedUpdate()
+    {
+        
+    }
+    private void Update()
+    {
+
+        if (isPush == true&&Input.GetKeyDown(KeyCode.E))
+        {
+            ShowDialog();
+        }
+        OnStartWriter();
+    }
+
     /// <summary>
     /// 结束打字，初始化数据
     /// </summary>

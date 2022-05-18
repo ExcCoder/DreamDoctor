@@ -12,9 +12,10 @@ public class StoryProcess : MonoBehaviour
         //是否可以交互
         if (College2DReturn.Interact)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E)&&College2DReturn.isPush)
             {
                 GameRoot.Instance.StoryManager.Process(College2DReturn.Interact.name);
+                College2DReturn.isPush = false;
             }
         }
     }
