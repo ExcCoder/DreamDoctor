@@ -6,14 +6,14 @@ using UnityEngine.Events;
 public class StoryManager
 {
     public static StateGraph<StoryState> StateGraph;
-    //unity事件，
+    //通过活动内容来获取事件，
     public UnityEvent<StoryAction> ActionStart = new UnityEvent<StoryAction>();
     /// <summary>
     /// 当前状态
     /// </summary>
     private StoryState curState;
     /// <summary>
-    /// 状态列表
+    /// 状态列表 图的节点
     /// </summary>
     private List<StoryState> activeStateList = new List<StoryState>();
 
@@ -43,7 +43,7 @@ public class StoryManager
         List<(StoryState, StoryState)> edges = storyData.GetEdgesList();
         for (int i = 0; i < edges.Count; i++)
         {
-            Debug.Log(edges[i].Item1.state_id+"--"+edges[i].Item2.state_id);
+            Debug.Log(edges[i].Item1.state_id + "--" + edges[i].Item2.state_id);
             Node<StoryState> v1 = new Node<StoryState>(edges[i].Item1);
             Node<StoryState> v2 = new Node<StoryState>(edges[i].Item2);
             StateGraph.SetEdge(v1, v2, 1);
@@ -57,15 +57,17 @@ public class StoryManager
     {
         for (int i = 0; i < activeStateList.Count; i++)
         {
-            Debug.Log(curState.trigger_id);
+
+            //如果stoty里有这个活动，并且处于可执行状态，则更改当前状态
             if (activeStateList[i].trigger_id == trigger_id && activeStateList[i].isActive == true)
             {
+                Debug.Log("查找到的状态" + curState.trigger_id);
                 curState = activeStateList[i];
                 NextAction();
                 break;
             }
         }
-        
+
     }
     //修改成了私有方法
     private void NextAction()
@@ -74,7 +76,6 @@ public class StoryManager
 
         if (curState.actionContent.Count > 0)
         {
-            //Pop一个对话内容
             StoryAction action = curState.actionContent.Dequeue();
             ActionStart.Invoke(action);
         }
@@ -97,7 +98,6 @@ public class StoryManager
             StoryState state = StateGraph[adjNode.Adjvex].Data.Data;
             state.SetActive(true); //其实这句话是有问题的，问题在于多个入度的State要让所有入度都满足才可以解锁。
             activeStateList.Add(state);
-            Debug.Log(state.state_id);
             adjNode = adjNode.Next;
         }
     }

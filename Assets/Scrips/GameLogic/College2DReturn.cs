@@ -13,7 +13,7 @@ public class College2DReturn : MonoBehaviour
     /// 是否能填装对话，不能时清空
     /// </summary>
     public static bool isPush = false;
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Insteract")
         {
@@ -21,20 +21,17 @@ public class College2DReturn : MonoBehaviour
             Interact.transform.GetChild(0).gameObject.SetActive(true);
             isPush = true;
         }
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
 
-        
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (Interact != null)
         {
-
+            //可触发物品的冒号删除
             Interact.transform.GetChild(0).gameObject.SetActive(false);
+            Interact = null;
             isPush = false;
-            Dialogue.Saycontent.Clear();
+            DialogPanel.Saycontent.Clear();
 
         }
     }

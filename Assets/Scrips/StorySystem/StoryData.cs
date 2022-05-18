@@ -14,13 +14,15 @@ public class StoryData
         //------------------------------------------
         //0
         actionContent = new Queue<StoryAction>();
-        actionContent.Enqueue(new StoryAction("对话框", "显示对话", "呼~"));
-        actionContent.Enqueue(new StoryAction("对话框", "显示对话", "虽然好不容易弄到这个心理咨询师的职位~"));
-        actionContent.Enqueue(new StoryAction("对话框", "显示对话", "不过心理咨询……到底是做什么的来着？"));
-        actionContent.Enqueue(new StoryAction("对话框", "显示对话", "……"));
-        actionContent.Enqueue(new StoryAction("对话框", "显示对话", "不管了，要是真的有倒霉蛋不幸跨入了这个诊所，就让他们睡一觉好了"));
-        actionContent.Enqueue(new StoryAction("对话框", "显示对话", "世上没有睡一觉解决不了的事情。"));
-        actionContent.Enqueue(new StoryAction("对话框", "显示对话", "让我看看办公室里都有些什么。"));
+        string[] content = new string[7];
+        content[0] = "呼~";
+        content[1] = "虽然好不容易弄到这个心理咨询师的职位~";
+        content[2] = "不过心理咨询……到底是做什么的来着？";
+        content[3] = "……";
+        content[4] = "不管了，要是真的有倒霉蛋不幸跨入了这个诊所，就让他们睡一觉好了";
+        content[5] = "世上没有睡一觉解决不了的事情。";
+        content[6] = "让我看看办公室里都有些什么。";
+        actionContent.Enqueue(new StoryAction("对话框", "显示对话", content));
         state = new StoryState(0,"林夕进门","门",actionContent);
         states.Add(state);
         
