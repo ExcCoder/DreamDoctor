@@ -11,7 +11,7 @@ public class StoryManager
     /// <summary>
     /// 当前状态
     /// </summary>
-    private StoryState curState;
+    public static StoryState curState;
     /// <summary>
     /// 状态列表 图的节点
     /// </summary>
@@ -61,7 +61,7 @@ public class StoryManager
             //如果stoty里有这个活动，并且处于可执行状态，则更改当前状态
             if (activeStateList[i].trigger_id == trigger_id && activeStateList[i].isActive == true)
             {
-                Debug.Log("查找到的状态" + curState.trigger_id);
+                //Debug.Log("查找到的状态" + curState.trigger_id);
                 curState = activeStateList[i];
                 NextAction();
                 break;
@@ -76,6 +76,7 @@ public class StoryManager
 
         if (curState.actionContent.Count > 0)
         {
+            //Debug.Log("Process NextActive"); 
             StoryAction action = curState.actionContent.Dequeue();
             ActionStart.Invoke(action);
         }

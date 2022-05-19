@@ -8,7 +8,7 @@ public class StartMicClick : MonoBehaviour
     SpriteRenderer obj;
     private void Start()
     {
-        audio = GameObject.Find("Root").GetComponent<AudioSource>();
+        audio = GameObject.Find("Main Camera").GetComponent<AudioSource>();
         anim = GameObject.Find("³ªÆ¬»ú").GetComponent<Animator>();
         JukeBox = GameObject.Find("³ªÆ¬»ú").GetComponent<SpriteRenderer>();
 

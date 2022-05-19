@@ -41,5 +41,9 @@ public class StoryState
         StoryState state = obj as StoryState;
         return state.state_id.Equals(this.state_id);
     }
+    public override int GetHashCode()
+    {
+        return base.GetHashCode();
+    }
 }
 

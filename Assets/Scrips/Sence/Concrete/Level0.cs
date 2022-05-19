@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainScene : SceneState//SceneStart
+public class Level0 : SceneState//SceneStart
 {
     readonly string sceneName = "Level0";
     PanelManager panelManager;

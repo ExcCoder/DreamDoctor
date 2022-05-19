@@ -5,10 +5,12 @@ using UnityEngine.UI;
 
 public class DialogPanel : MonoBehaviour
 {
+    public static DialogPanel dialog;
     private static Queue<string> saycontent = new Queue<string>();
     public Text text;
-    private GameObject BG;
-    private string[] GetContent;
+    public GameObject BG;
+    public Text  Hint;
+    private string[] GetContent = null;
     private float charsPerSecond = 0.2f;
     private float timer;//计时器
     private bool isActive; //是否开启打字
@@ -16,13 +18,18 @@ public class DialogPanel : MonoBehaviour
     private int currentPos = 0;//当前打字位置
     private string sentence;
     private string selfName = "对话框";
+    bool isAuto = false;
+    bool isAuto2 = false;
 
+    private void Awake()
+    {
+        dialog = this;
+    }
 
     public static Queue<string> Saycontent { get => saycontent; set => saycontent = value; }
 
     void Start()
     {
-        BG = GameObject.Find("TalkBG");
         BG.gameObject.SetActive(false);
         timer = 0;
         isActive = false;
@@ -32,8 +39,11 @@ public class DialogPanel : MonoBehaviour
         GameRoot.Instance.StoryManager.ActionStart.AddListener
             (action =>
             {
-                if(action.targetName.Equals(selfName))
+                if (action.targetName.Equals(selfName))
+                {
                     ExecuteAction(action);
+
+                }
             });
     }
     public void ExecuteAction(StoryAction action)
@@ -41,7 +51,7 @@ public class DialogPanel : MonoBehaviour
         switch (action.actionName)
         {
             case "显示对话":
-                Debug.Log(action.actionName);
+                //Debug.Log(action.actionName);
                 GetContent = action.info as string[];
                 for (int i = 0; i < GetContent.Length; i++)
                 {
@@ -49,21 +59,29 @@ public class DialogPanel : MonoBehaviour
                 }
                 isPush = true;
                 break;
+            case "显示提示":
+                Hint.gameObject.SetActive(true);
+                Hint.text = action.info as string;
+                College2DReturn.isPush = true;
+                GameRoot.Instance.StoryManager.Process(StoryManager.curState.trigger_id);
+                break;
+
         }
     }
-    void ShowDialog()
+   public void ShowDialog()
     {
         timer = 0;
         currentPos = 0;
-        Debug.Log("栈存储的数量" + Saycontent.Count);
+       // Debug.Log("栈存储的数量" + Saycontent.Count);
         //栈为空时退出对话并且继续游戏
         if (Saycontent.Count == 0)
         {
+            College2DReturn.isPush = true;
             Debug.Log("空");
-            BG.gameObject.SetActive(false);
             Time.timeScale = 1;
+            BG.gameObject.SetActive(false);
             isPush = false;
-            GameRoot.Instance.StoryManager.EndAction();
+            
         }
         else
         {
@@ -98,14 +116,10 @@ public class DialogPanel : MonoBehaviour
             }
         }
     }
-    private void FixedUpdate()
-    {
-        
-    }
     private void Update()
     {
 
-        if (isPush == true&&Input.GetKeyDown(KeyCode.E))
+        if (isPush == true && Input.GetKeyDown(KeyCode.E))
         {
             ShowDialog();
         }
@@ -117,7 +131,7 @@ public class DialogPanel : MonoBehaviour
     /// </summary>
     void OnFinish()
     {
-        Debug.Log("结束打字");
+        //Debug.Log("结束打字");
         isActive = false;
         text.text = sentence;
     }

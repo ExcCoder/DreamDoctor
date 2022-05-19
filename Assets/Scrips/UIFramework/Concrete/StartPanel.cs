@@ -14,7 +14,7 @@ public class StartPanel : BasePanel
         UITool.GetOrAddComponentInChild<Button>("NewGame").onClick.AddListener(() => {
             //点击事件可以写在这里面
             Debug.Log("新游戏按钮被点了");
-            GameRoot.Instance.SceneSystem.SetScene(new MainScene());
+            GameRoot.Instance.SceneSystem.SetScene(new Level0());
         });
     }
 }

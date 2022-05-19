@@ -13,6 +13,7 @@ public class GameRoot : MonoBehaviour
     /// </summary>
     public SceneSystem SceneSystem { get; private set; }
     public StoryManager StoryManager { get; private set; }
+    public PanelManager PanelManager { get; private set; }
     private void Awake()
     {
         if (Instance == null)

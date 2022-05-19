@@ -72,10 +72,15 @@ public class BasePanel
     /// <summary>
     /// UIÍË³öÊ±Ö´ĞĞ
     /// </summary>
-    public virtual void OnExit() {
+    public virtual void OnExit()
+    {
         UIManager.DestroyUI(UIType);
     }
     public void Push(BasePanel panel) => PanelManager?.Push(panel);
-    public void Pop() => PanelManager?.Pop();
+    public void Pop()
+    {
+        Debug.Log("pop");
+        PanelManager?.Pop();
+    }
     public void PopAll() => PanelManager?.PopAll();
 }

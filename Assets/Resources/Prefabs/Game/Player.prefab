@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8384797619497306795}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: CeilCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 1.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 8384797619684258014}
+  m_Father: {fileID: 6140260147562422045}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8384797619684258013
@@ -38,7 +38,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8384797619684258014}
+  - component: {fileID: 6140260147562422045}
   - component: {fileID: 8384797619684258010}
   - component: {fileID: 8384797619684258009}
   - component: {fileID: 8384797619684258008}
@@ -47,23 +47,23 @@ GameObject:
   - component: {fileID: 8384797619684258020}
   - component: {fileID: 8384797619684258011}
   - component: {fileID: 959297167307504955}
-  - component: {fileID: 7488101466955400563}
-  m_Layer: 0
+  - component: {fileID: 7622909914394598977}
+  m_Layer: 1
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8384797619684258014
-Transform:
+--- !u!224 &6140260147562422045
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8384797619684258013}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 39.752, y: -2.21, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8384797619497306795}
@@ -71,6 +71,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 960, y: 540}
+  m_SizeDelta: {x: 1920, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8384797619684258010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,7 +328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ee5911114376324eacc1d141f8c28f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7488101466955400563
+--- !u!114 &7622909914394598977
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -332,7 +337,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8384797619684258013}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41e2852b6e03dd24aaa09954179a4f20, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f5d4c49b81f4744ab391313a5fd76b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8384797620542855924
@@ -344,7 +349,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8384797620542855925}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -362,6 +367,6 @@ Transform:
   m_LocalPosition: {x: 0, y: -1.171, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 8384797619684258014}
+  m_Father: {fileID: 6140260147562422045}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

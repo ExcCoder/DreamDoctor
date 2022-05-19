@@ -15,6 +15,7 @@ public class StoryProcess : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E)&&College2DReturn.isPush)
             {
                 GameRoot.Instance.StoryManager.Process(College2DReturn.Interact.name);
+               // GameRoot.Instance.StoryManager.Process("’ÏÃΩ");
                 College2DReturn.isPush = false;
             }
         }
